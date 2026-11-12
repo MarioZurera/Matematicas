@@ -1,0 +1,78 @@
+\section{Teoría elemental de números}
+
+\begin{ejercicio}
+    Para ningún número natural $n$ es $n^2 + 1$ divisible por 7.
+\end{ejercicio}
+
+\begin{proof}
+    $n^2 + 1$ es divisible entre 7 si y solo si $n^2 = 7k + 6$ para algún entero $k$, es decir,
+    si y solo si $(n^2) \MOD 7 = 6$.
+    Basta, por tanto, con ver que $n^2 \MOD 7 \neq 6$ para todo $n$.
+    Observamos que:
+    \[ n \MOD 7 = (n \MOD 7) \MOD 7 \]
+    y por tanto, utilizando la propiedad 2 del módulo,
+    \[ n^2 \MOD 7 = {(n \MOD 7)}^2 \MOD 7 \]
+    ya que $0 \le n \MOD 7 < 7$, será suficiente comprobar los 7 valores posibles de $n \MOD 7$.
+    \begin{align*}
+        0^2 \MOD 7 &= 0, & 1^2 \MOD 7 &= 1, & 2^2 \MOD 7 &= 4, & 3^2 \MOD 7 &= 2, \\
+        4^2 \MOD 7 &= 2, & 5^2 \MOD 7 &= 4, & 6^2 \MOD 7 &= 1.
+    \end{align*}
+    Ningún resultado es 6, luego $n^2 \MOD 7 \neq 6$ para todo $n$.
+\end{proof}
+
+\begin{definicion}\label{def:mcd}
+    Sean $a$ y $b$ enteros. Un entero $d \neq 0$ es un divisor común de $a$ y $b$ si
+    $d \mid a$ y $d \mid b$. Un divisor común de de $a$ y $b$ se llama
+    \emph{máximo común divisor} de $a$ y $b$ si $d > 0$ y cada común divisor de
+    $a$ y $b$ divide también a $d$. Al máximo común divisor de $a$ y $b$
+    le designaremos por $m.c.d(a, b)$.
+    
+    En el caso que $a = b = 0$, entonces $m.c.d(0, 0) = 0$.
+\end{definicion}
+
+\begin{teorema}
+    Sean $a$ y $b$ enteros distintos de $0$. Entonces existe un único $d$ máximo
+    común divisor de $a$ y $b$. Además $d$ es el entero positivo más pequeño que
+    puede expresarse en la forma $ax + by$ donde $x$ e $y$ son números enteros.
+\end{teorema}
+
+\begin{proof}
+    Probemos que existe $d > 0$ que divide a $a$ y $b$, y
+    a su vez es divisible por cada común divisor de $a$ y $b$.
+
+    Tomando cualquier divisor común $c$,
+    por la propiedad 6 del apartado 1.3 del texto se cumple que $c \mid (ax + by)$
+    para cualquier par de enteros $x$ e $y$.
+
+    Ahora probemos la existencia del menor elemento que cumple dicha propiedad.
+    Sea $S$ el conjunto de números $z$ que cumplen la propiedad $z = ax + by$ con $z > 0$.
+    $S$ es un conjunto no vacío dado que, para $a > 0$ tomando el par $x = 1$ y $y = 0$
+    resultaría en $z = a$, y para $a < 0$ tomando el par $x = -1$ y $y = 0$ resultaría en $z = -a$.
+    Por el principio de la buena ordenación de los números naturales
+    existe un elemento mínimo de $S$, lo denotaremos por $d = ax_0 + by_0$.
+
+    Utilizando el algoritmo de la división: $a = dq + r$, donde $0 \le r < d$.
+    Procedamos por reducción al absurdo, supongamos $r > 0$.
+    Podemos reescribir $r$ de la siguiente manera:
+    \begin{align*}
+        r &= a - dq = a - (ax_0 + by_0)q \\
+          &= a(1 - x_0q) + b(-y_0q)
+    \end{align*}
+    y como $(1 - x_0q)$ y $(-y_0q)$ son enteros, $r \in S$. Pero $r < d$ llegando a una contradicción
+    ya que $d$ es el menor elemento de $S$, por lo tanto $r = 0$, siendo así $d$ un divisor de $a$.
+
+    Se demuestra la afirmación $d \mid b$ de forma análoga.
+    Como $d$ es de la forma $ax + by$ todo divisor común a $a$ y $b$ divide a $d$.
+    Por tanto, $d$ es un máximo común divisor de $a$ y $b$, lo que demuestra su existencia.
+
+    Sea $d'$ otro máximo común divisor de $a$ y $b$.
+    Como ambos son máximo común divisor, $d, d' > 0$.
+    Como $d'$ es divisor común y $d$ es máximo común divisor, $d' \mid d$.
+    Y recíprocamente $d \mid d'$.
+    Cumplen las condiciones necesarias para aplicar la propiedad 7
+    del apartado 1.3 del texto: $d \le d'$ y $d' \le d$.
+    Por lo tanto $d = d'$.
+
+    Así, el máximo común divisor es único y coincide con $d$,
+    que por construcción es el menor entero positivo de la forma $ax + by$.
+\end{proof}

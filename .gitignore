@@ -1,0 +1,20 @@
+# Salida de compilación (los PDF se generan, no se versionan)
+build/
+*.pdf
+
+# Auxiliares de LaTeX
+*.aux
+*.log
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
