@@ -1,8 +1,90 @@
 % !TEX root = ../main.tex
 \section{Teoría elemental de números}
 
+\subsection{Algoritmos de División y Euclides}
+
+\begin{definition}[Divisibilidad]\label{def:divide}
+    Sean $a, b \in \mathbb{Z}$ con $a \neq 0$. Decimos que $a$ \emph{divide} a $b$,
+    y escribimos $a \mid b$, si existe $q \in \mathbb{Z}$ tal que $b = aq$.
+    En ese caso también se dice que $a$ es un \emph{divisor} o \emph{factor} de $b$,
+    o que $b$ es un \emph{múltiplo} de $a$.
+    \src{1-1.1}
+\end{definition}
+
+\begin{proposition}[Propiedades de los enteros]\label{prop:ent}
+    Para cualesquiera $a, b, c \in \mathbb{Z}$:
+    \begin{enumerate}[label=(\arabic*), ref=\theproposition(\arabic*)]
+        \item\label{prop:ent-cero} $0 \cdot a = 0$.
+        \item\label{prop:ent-signo} $a(-b) = -(ab)$.
+        \item\label{prop:ent-cancelacion} \emph{(Cancelación)} Si $a \neq 0$ y $ab = ac$,
+              entonces $b = c$.
+        \item\label{prop:div-multiplo} Si $a \neq 0$ y $a \mid b$, entonces $a$ divide
+              a todo múltiplo de $b$: $a \mid bx$ para todo $x \in \mathbb{Z}$.
+        \item\label{prop:div-transitiva} \emph{(Transitividad)} Si $a, b \neq 0$,
+              $a \mid b$ y $b \mid c$, entonces $a \mid c$.
+        \item\label{prop:div-comb-lineal} Si $a \neq 0$ divide a $b$ y a $c$, entonces
+              divide a cualquier combinación lineal entera de ambos:
+              $a \mid bx + cy$ para todo $x, y \in \mathbb{Z}$.
+        \item\label{prop:div-orden} Si $a, b > 0$ y $a \mid b$, entonces $a \le b$.
+        \item\label{prop:div-antisimetrica} Si $a, b \neq 0$, $a \mid b$ y $b \mid a$,
+              entonces $a = \pm b$.
+              \src{1-1.3}
+    \end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Algoritmo de la División para naturales]\label{teo:division}
+    Sean $a$ y $b$ enteros donde $b > 0$. Entonces existen números enteros únicos $q$ y $r$ tales que
+    $a = bq + r$ con $0 \le r < b$.
+    \src{1-1.9}
+\end{theorem}
+
+\begin{idea}
+    $bq$ es el mayor múltiplo de $b$ que no supera a $a$, y $r$ es lo que falta.
+\end{idea}
+
+\begin{proof}
+    \emph{Existencia.} Sea $S = \{\, a - bk : k \in \mathbb{Z},\ a - bk \ge 0 \,\}$.
+    $S$ no es vacío: para $k = -|a|$ se tiene $a + b|a| \ge a + |a| \ge 0$.
+    Por el principio de buena ordenación, $S$ tiene un mínimo $r = a - bq \ge 0$.
+    Si fuera $r \ge b$, entonces $r - b = a - b(q+1)$ estaría en $S$ y sería menor
+    que $r$, lo que es absurdo. Luego $0 \le r < b$.
+
+    \emph{Unicidad.} Si $a = bq + r = bq' + r'$ con $0 \le r, r' < b$, entonces
+    $b(q - q') = r' - r$ y $|r' - r| < b$. Un múltiplo de $b$ con valor absoluto
+    menor que $b$ solo puede ser $0$ (Proposición~\ref{prop:div-orden}), así que
+    $r = r'$, y por la Proposición~\ref{prop:cancelacion}, $q = q'$.
+\end{proof}
+
+\begin{corollary}[Algoritmo de la División]\label{cor:division}
+    Dados dos enteros $a$ y $b$ con $b \ne 0$ entonces existen $q$ y $r$ únicos tales que
+    $a = bq + r$ donde $0 \le r < |b|$.
+    \src{1-1.10}
+\end{corollary}
+
+\begin{idea}
+    Aplicar el \nameref{teo:division} para $|b|$.
+\end{idea}
+
+\begin{definition}[Operador $\MOD$]\label{def:mod}
+    Sean $a, b \in \mathbb{Z}$ con $b \neq 0$. Definimos $a \MOD b$ como el resto $r$
+    que da el Corolario~\fullref{cor:division} al dividir $a$ entre $b$; es decir,
+    el único $r$ con $0 \le r < |b|$ tal que $a = bq + r$ para algún $q \in \mathbb{Z}$.
+    \src{1-1.14}
+\end{definition}
+
+\begin{proposition}[Propiedades del módulo]\label{prop:mod}
+    Para cualesquiera $a, b, c, d, m \in \mathbb{Z}$ con $m \ne 0$.
+    Si $a \MOD m = c \MOD m$ y $b \MOD m = d \MOD m$, entonces:
+    \begin{enumerate}[label= (\arabic*), ref=\theproposition(\arabic*)]
+        \item\label{prop:mod-suma} $(a+b) \MOD m = (c+d) \MOD m$.
+        \item\label{prop:mod-producto} $(ab) \MOD m = (cd) \MOD m$.
+        \src{1-1.16}
+    \end{enumerate}
+\end{proposition}
+
 \begin{exercise}
     Para ningún número natural $n$ es $n^2 + 1$ divisible por 7.
+    \src{1-1.18}
 \end{exercise}
 
 \begin{proof}
@@ -11,7 +93,7 @@
     Basta, por tanto, con ver que $n^2 \MOD 7 \neq 6$ para todo $n$.
     Observamos que:
     \[ n \MOD 7 = (n \MOD 7) \MOD 7 \]
-    y por tanto, utilizando la propiedad 2 del módulo,
+    utilizando la Proposición~\ref{prop:mod-producto},
     \[ n^2 \MOD 7 = {(n \MOD 7)}^2 \MOD 7 \]
     ya que $0 \le n \MOD 7 < 7$, será suficiente comprobar los 7 valores posibles de $n \MOD 7$.
     \begin{align*}
@@ -21,20 +103,23 @@
     Ningún resultado es 6, luego $n^2 \MOD 7 \neq 6$ para todo $n$.
 \end{proof}
 
-\begin{definition}\label{def:mcd}
-    Sean $a$ y $b$ enteros. Un entero $d \neq 0$ es un divisor común de $a$ y $b$ si
-    $d \mid a$ y $d \mid b$. Un divisor común de $a$ y $b$ se llama
-    \emph{máximo común divisor} de $a$ y $b$ si $d > 0$ y cada común divisor de
-    $a$ y $b$ divide también a $d$. Al máximo común divisor de $a$ y $b$
-    le designaremos por $\mcd(a, b)$.
-    
-    En el caso que $a = b = 0$, entonces $\mcd(0, 0) = 0$.
+\begin{definition}[Máximo Común Divisor]\label{def:mcd}
+    Sean $a, b \in \mathbb{Z}$. Un \emph{divisor común} de $a$ y $b$ es un entero
+    $d \neq 0$ tal que $d \mid a$ y $d \mid b$.
+
+    El \emph{máximo común divisor} de $a$ y $b$, denotado $\mcd(a,b)$, es el divisor
+    común $d > 0$ al que divide cualquier otro divisor común de $a$ y $b$.
+    Por convenio, $\mcd(0,0) = 0$.
+
+    Si $\mcd(a,b) = 1$, decimos que $a$ y $b$ son \emph{primos entre sí} o \emph{coprimos}.
+    \src{1-1.19}
 \end{definition}
 
 \begin{theorem}[Identidad de Bézout]\label{teo:bezout}
     Sean $a$ y $b$ enteros distintos de $0$. Entonces existe un único $d$ máximo
     común divisor de $a$ y $b$. Además $d$ es el entero positivo más pequeño que
     puede expresarse en la forma $ax + by$ donde $x$ e $y$ son números enteros.
+    \src{1-1.22}
 \end{theorem}
 
 \begin{proof}
@@ -42,7 +127,7 @@
     a su vez es divisible por cada común divisor de $a$ y $b$.
 
     Tomando cualquier divisor común $c$,
-    por la propiedad 6 del apartado 1.3 del texto se cumple que $c \mid (ax + by)$
+    por la Proposición~\ref{prop:div-comb-lineal}, $c \mid (ax + by)$
     para cualquier par de enteros $x$ e $y$.
 
     Ahora probemos la existencia del menor elemento que tenga la forma $ax + by$.
@@ -52,7 +137,7 @@
     Debido a que no es el conjunto vacío y está acotado inferiormente, por el principio
     de la buena ordenación existe un elemento mínimo de $S$, lo denotaremos por $d = ax_0 + by_0$.
 
-    Utilizando el algoritmo de la división: $a = dq + r$, donde $0 \le r < d$.
+    Utilizando el \nameref{cor:division}, $a = dq + r$, donde $0 \le r < d$.
     Procedamos por reducción al absurdo, supongamos $r > 0$.
     Podemos reescribir $r$ de la siguiente manera:
     \begin{align*}
@@ -70,8 +155,7 @@
     Como ambos son máximo común divisores, $d, d' > 0$.
     Como $d'$ es divisor común y $d$ es máximo común divisor, $d' \mid d$.
     Y recíprocamente $d \mid d'$.
-    Cumplen las condiciones necesarias para aplicar la propiedad 7
-    del apartado 1.3 del texto: $d \le d'$ y $d' \le d$.
+    Cumplen las condiciones necesarias para aplicar la Proposición~\ref{prop:div-orden}: $d \le d'$ y $d' \le d$.
     Por lo tanto $d = d'$.
 
     Así, el máximo común divisor es único y coincide con $d$,
@@ -79,9 +163,17 @@
 \end{proof}
 
 
+% Faltan teoremas por apuntar, se puede simplemente escribir la idea sin
+% demostracion son teoremas menores
+
+
+
+\subsection{Números Primos y Teorema Fundamental de la Aritmética}
+
 \begin{lemma}[Lema de Euclides]\label{lem:euclides}
     Sean $a$, $b$ y $c$ números enteros. Supongamos que $a$ y $c$ son primos entre
     sí y que $c \mid ab$. Entonces $c \mid b$.
+    \src{1-2.6}
 \end{lemma}
 
 \begin{proof}
