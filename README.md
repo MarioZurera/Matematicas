@@ -46,7 +46,7 @@ These are personal study notes, shared for non-commercial, educational purposes.
 ## License
 
 - LaTeX code (`common/`, preambles, macros): [MIT](LICENSE).
-- Notes (the mathematical content written by me): [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+- Notes (the mathematical content written by me): [CC BY-NC-SA 4.0](LICENSE-notes).
 
 This license applies only to my own work, not to the cited books or
 course materials.
