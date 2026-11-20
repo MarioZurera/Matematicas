@@ -1,3 +1,6 @@
+# Archivos personales
+*.local.md
+
 # Salida de compilación (los PDF se generan, no se versionan)
 build/
 *.pdf
