@@ -1,8 +1,9 @@
+% !TEX root = ../main.tex
 \section{Teoría elemental de números}
 
-\begin{ejercicio}
+\begin{exercise}
     Para ningún número natural $n$ es $n^2 + 1$ divisible por 7.
-\end{ejercicio}
+\end{exercise}
 
 \begin{proof}
     $n^2 + 1$ es divisible entre 7 si y solo si $n^2 = 7k + 6$ para algún entero $k$, es decir,
@@ -20,7 +21,7 @@
     Ningún resultado es 6, luego $n^2 \MOD 7 \neq 6$ para todo $n$.
 \end{proof}
 
-\begin{definicion}\label{def:mcd}
+\begin{definition}\label{def:mcd}
     Sean $a$ y $b$ enteros. Un entero $d \neq 0$ es un divisor común de $a$ y $b$ si
     $d \mid a$ y $d \mid b$. Un divisor común de $a$ y $b$ se llama
     \emph{máximo común divisor} de $a$ y $b$ si $d > 0$ y cada común divisor de
@@ -28,13 +29,13 @@
     le designaremos por $\mcd(a, b)$.
     
     En el caso que $a = b = 0$, entonces $\mcd(0, 0) = 0$.
-\end{definicion}
+\end{definition}
 
-\begin{teorema}[Identidad de Bézout]\label{teo:bezout}
+\begin{theorem}[Identidad de Bézout]\label{teo:bezout}
     Sean $a$ y $b$ enteros distintos de $0$. Entonces existe un único $d$ máximo
     común divisor de $a$ y $b$. Además $d$ es el entero positivo más pequeño que
     puede expresarse en la forma $ax + by$ donde $x$ e $y$ son números enteros.
-\end{teorema}
+\end{theorem}
 
 \begin{proof}
     Probemos que existe $d > 0$ que divide a $a$ y $b$, y
@@ -78,17 +79,17 @@
 \end{proof}
 
 
-\begin{lema}[Lema de Euclides]\label{lem:euclides}
+\begin{lemma}[Lema de Euclides]\label{lem:euclides}
     Sean $a$, $b$ y $c$ números enteros. Supongamos que $a$ y $c$ son primos entre
     sí y que $c \mid ab$. Entonces $c \mid b$.
-\end{lema}
+\end{lemma}
 
 \begin{proof}
     Si $a = 0$, entonces $1 = \mcd(a, c) = \mcd(0, c) = |c|$,
     luego $c = \pm1$ y $c \mid b$.
 
     Supongamos ahora $a \ne 0$. Como $c \mid ab$, se tiene $c \ne 0$.
-    Por tanto, podemos aplicar el Teorema~\ref{teo:bezout}: existen $s$ y $t$ enteros
+    Por tanto, podemos aplicar el Teorema~\fullref{teo:bezout}: existen $s$ y $t$ enteros
     tales que $as + ct = 1$. Multiplicando ambos miembros de la igualdad por $b$ obtenemos:
     \[ abs + cbt = b. \]
 

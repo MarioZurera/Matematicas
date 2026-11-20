@@ -1,0 +1,18 @@
+% Shared preamble, language-independent.
+% Load AFTER a language file: \input{.../common/lang/xx}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\fullref}[1]{\ref{#1} (\nameref{#1})}
+
+
+% Theorem environment names are always in English;
+% \thmname* holds the printed title, defined in common/lang/*.tex
+\newtheorem{theorem}{\thmnametheorem}[section]
+\newtheorem{lemma}[theorem]{\thmnamelemma}
+\newtheorem{corollary}[theorem]{\thmnamecorollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{\thmnamedefinition}
+\newtheorem{exercise}[theorem]{\thmnameexercise}
+\newtheorem{example}[theorem]{\thmnameexample}
+
