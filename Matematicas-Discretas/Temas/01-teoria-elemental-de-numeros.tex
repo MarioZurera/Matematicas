@@ -22,15 +22,15 @@
 
 \begin{definicion}\label{def:mcd}
     Sean $a$ y $b$ enteros. Un entero $d \neq 0$ es un divisor común de $a$ y $b$ si
-    $d \mid a$ y $d \mid b$. Un divisor común de de $a$ y $b$ se llama
+    $d \mid a$ y $d \mid b$. Un divisor común de $a$ y $b$ se llama
     \emph{máximo común divisor} de $a$ y $b$ si $d > 0$ y cada común divisor de
     $a$ y $b$ divide también a $d$. Al máximo común divisor de $a$ y $b$
-    le designaremos por $m.c.d(a, b)$.
+    le designaremos por $\mcd(a, b)$.
     
-    En el caso que $a = b = 0$, entonces $m.c.d(0, 0) = 0$.
+    En el caso que $a = b = 0$, entonces $\mcd(0, 0) = 0$.
 \end{definicion}
 
-\begin{teorema}
+\begin{teorema}[Identidad de Bézout]\label{teo:bezout}
     Sean $a$ y $b$ enteros distintos de $0$. Entonces existe un único $d$ máximo
     común divisor de $a$ y $b$. Además $d$ es el entero positivo más pequeño que
     puede expresarse en la forma $ax + by$ donde $x$ e $y$ son números enteros.
@@ -44,12 +44,12 @@
     por la propiedad 6 del apartado 1.3 del texto se cumple que $c \mid (ax + by)$
     para cualquier par de enteros $x$ e $y$.
 
-    Ahora probemos la existencia del menor elemento que cumple dicha propiedad.
+    Ahora probemos la existencia del menor elemento que tenga la forma $ax + by$.
     Sea $S$ el conjunto de números $z$ que cumplen la propiedad $z = ax + by$ con $z > 0$.
     $S$ es un conjunto no vacío dado que, para $a > 0$ tomando el par $x = 1$ y $y = 0$
     resultaría en $z = a$, y para $a < 0$ tomando el par $x = -1$ y $y = 0$ resultaría en $z = -a$.
-    Por el principio de la buena ordenación de los números naturales
-    existe un elemento mínimo de $S$, lo denotaremos por $d = ax_0 + by_0$.
+    Debido a que no es el conjunto vacío y está acotado inferiormente, por el principio
+    de la buena ordenación existe un elemento mínimo de $S$, lo denotaremos por $d = ax_0 + by_0$.
 
     Utilizando el algoritmo de la división: $a = dq + r$, donde $0 \le r < d$.
     Procedamos por reducción al absurdo, supongamos $r > 0$.
@@ -66,7 +66,7 @@
     Por tanto, $d$ es un máximo común divisor de $a$ y $b$, lo que demuestra su existencia.
 
     Sea $d'$ otro máximo común divisor de $a$ y $b$.
-    Como ambos son máximo común divisor, $d, d' > 0$.
+    Como ambos son máximo común divisores, $d, d' > 0$.
     Como $d'$ es divisor común y $d$ es máximo común divisor, $d' \mid d$.
     Y recíprocamente $d \mid d'$.
     Cumplen las condiciones necesarias para aplicar la propiedad 7
@@ -75,4 +75,28 @@
 
     Así, el máximo común divisor es único y coincide con $d$,
     que por construcción es el menor entero positivo de la forma $ax + by$.
+\end{proof}
+
+
+\begin{lema}[Lema de Euclides]\label{lem:euclides}
+    Sean $a$, $b$ y $c$ números enteros. Supongamos que $a$ y $c$ son primos entre
+    sí y que $c \mid ab$. Entonces $c \mid b$.
+\end{lema}
+
+\begin{proof}
+    Si $a = 0$, entonces $1 = \mcd(a, c) = \mcd(0, c) = |c|$,
+    luego $c = \pm1$ y $c \mid b$.
+
+    Supongamos ahora $a \ne 0$. Como $c \mid ab$, se tiene $c \ne 0$.
+    Por tanto, podemos aplicar el Teorema~\ref{teo:bezout}: existen $s$ y $t$ enteros
+    tales que $as + ct = 1$. Multiplicando ambos miembros de la igualdad por $b$ obtenemos:
+    \[ abs + cbt = b. \]
+
+    Como $c \mid ab$, por definición de divisibilidad existe un entero $k$ tal que
+    $ab = ck$. Sustituyendo $ab$ en la igualdad anterior:
+    \begin{align*}
+        cks + cbt &= b \\
+        c(ks + bt) &= b.
+    \end{align*}
+    Dado que $ks + bt$ es un número entero, $c$ divide a $b$.
 \end{proof}
